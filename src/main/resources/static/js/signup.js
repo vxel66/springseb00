@@ -155,8 +155,12 @@ $(function(){
                 })
 
     $("#formsubmit").click(function(){
-        if(!$(""))
-        if($("#idresult").html()!="사용가능"){
+        if( ! $('input[name=signupsign]').is(":checked") ) {
+             alert(" 회원가입 약관 동의시 회원가입이 가능합니다 . ");
+        }
+        else if( ! $('input[name=infosign]').is(":checked") ) {
+             alert(" 개인정보처리방침 동의시 회원가입이 가능합니다 . ");
+        }else if($("#idresult").html()!="사용가능"){
             alert("아이디 사용불가입니다");
         }else if($("#pwresult").html()!="사용가능"){
             alert("비밀번호 사용불가입니다");
