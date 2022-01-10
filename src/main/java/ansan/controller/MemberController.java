@@ -72,7 +72,7 @@ public class MemberController {
     // 회원정보찾기 페이지로 연결
     @GetMapping("/member/findid")
     public String findid(){
-        return "/member/findid";
+        return "member/findid";
     }
 
     @PostMapping("/member/findidcontroller")
