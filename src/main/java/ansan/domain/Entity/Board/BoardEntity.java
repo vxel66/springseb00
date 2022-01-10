@@ -6,7 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity // db내 테이블과 매핑 설정
+@Entity
 @Table( name = "board") // 테이블속성 / 테이블이름 설정
 @Getter@Setter @ToString
 @AllArgsConstructor @NoArgsConstructor @Builder
