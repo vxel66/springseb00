@@ -37,8 +37,6 @@ public class MemberController {
                                    @RequestParam("address3") String address3,
                                    @RequestParam("address4") String address4 ){
         memberDto.setM_address(address1+"/"+address2+"/"+address3+"/"+address4);
-        System.out.println("ad1 : "+address1);
-        System.out.println("memad : "+memberDto.getM_address());
      // 자동주입 : form 입력한 name 과 dto의 필드명 동일하면 자동주입 // 입력이 없는 필드는 초기값[ 문자=null , 숫자 = 0 ]
         memberService.membersignup(memberDto);
         return "redirect:/";  // 회원가입 성공시 메인페이지 연결
@@ -93,7 +91,7 @@ public class MemberController {
 
     @PostMapping("/member/findpasswordcontroller")
     public String findpassword( MemberDto memberDto , Model model ){
-        boolean result = memberService.findpassword( memberDto);
+        boolean result = memberService.findpassword( memberDto ) ;
         if( result ){
             String msg = " 해당 이메일로 임시비밀번호 발송했습니다." ;
             model.addAttribute("findpwmsg", msg);
@@ -103,6 +101,8 @@ public class MemberController {
         }
         return "member/findid";
     }
+
+
     
     //아이디 중복체크
     @PostMapping("/member/idcheck")

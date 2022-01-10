@@ -32,7 +32,7 @@ public class BoardController {
     @PostMapping("/board/boardwritecontroller")
     public String boardwritecontroller(BoardDto boardDto){
         boardService.boardwrite( boardDto );
-        return "redirect:board/boardlist"; // 글쓰기 성공시 게시판 목록이동
+        return "redirect:/board/boardlist"; // 글쓰기 성공시 게시판 목록이동
     }
 
 }
