@@ -19,7 +19,7 @@ public class BoardEntity extends BaseTimeEntity {
     @Column
     private String b_contetns;
     @Column
-    private String b_write;
+    private String b_writer;
     @Column
     private int b_view;
 

@@ -31,7 +31,7 @@ public class BoardService {
                     boardEntity.getB_num() ,
                     boardEntity.getB_title() ,
                     boardEntity.getB_contetns(),
-                    boardEntity.getB_write() ,
+                    boardEntity.getB_writer() ,
                     boardEntity.getCreatedDate() ,
                     boardEntity.getB_view() );
             boardDtos.add( boardDto ); //  리스트에 저장

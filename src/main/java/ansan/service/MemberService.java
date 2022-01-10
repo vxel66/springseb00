@@ -71,7 +71,7 @@ public class MemberService {
         List<MemberEntity> memberEntities = memberRepository.findAll();
 
         for( MemberEntity memberEntity  :  memberEntities) {
-
+            if(memberEntity.getM_email().equals(memberDto.getM_email())){
             StringBuilder body = new StringBuilder();   // StringBuilder  : 문자열 연결 클래스  [ 문자열1+문자열2 ]
             body.append("<html> <body><h1> Ansan 계정 임시 비밀번호 </h1>");    // 보내는 메시지에 html 추가
 
@@ -85,15 +85,16 @@ public class MemberService {
             body.append("<div>" + temppassword + "</div></html>");      // 보내는 메시지에 임시비밀번호를 html에 추가
 
             // !!!엔티티내 패스워드 변경
-            memberEntity.setM_password(temppassword.toString());     //JPA
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@22아이디@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+memberDto.getM_email());
+
+                memberEntity.setM_password(temppassword.toString());     //JPA
+
 
             try {
                 // Mime : 전자우편 포멧 프로토콜[통신 규약]
                 // SMTP : 전자우편 전송 프로토콜 [ 통신 규약 ]
                 MimeMessage message = javaMailSender.createMimeMessage();
                 MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "utf-8");
-                mimeMessageHelper.setFrom("dhehdwls43@naver.com", "Ansan");      // 보내는사람  //  이름
+                mimeMessageHelper.setFrom("alsdnr5341@naver.com", "Ansan");      // 보내는사람  //  이름
                 mimeMessageHelper.setTo(memberDto.getM_email());                                                 //  받는사람
                 mimeMessageHelper.setSubject("Ansan 계정 임시 비밀번호 발송 ");                      // 메일 제목
                 mimeMessageHelper.setText(body.toString(), true);                                    // 메일 내용    // html 형식유무
@@ -104,6 +105,7 @@ public class MemberService {
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.println("메일전송 실패 " + e);
             }
+        }
         }
         return false;
     }
