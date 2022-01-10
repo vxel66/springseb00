@@ -88,7 +88,7 @@ public class MemberController {
             model.addAttribute("findidmsg", msg);
         }
 
-        return "/member/findid";
+        return "member/findid";
     }
 
     @PostMapping("/member/findpasswordcontroller")
@@ -101,7 +101,7 @@ public class MemberController {
             String msg = " 동일한 회원정보가 없습니다." ;
             model.addAttribute("findpwmsg", msg);
         }
-        return "/member/findid";
+        return "member/findid";
     }
     
     //아이디 중복체크
@@ -140,7 +140,7 @@ public class MemberController {
         MemberDto memberDto = memberService.getmemberDto(loginDto.getM_num());
         //3.찾은 회원정보를 model 인터페이스를 이용한 view
         model.addAttribute("memberDto",memberDto);
-        return "/member/myinfo";
+        return "member/myinfo";
     }
 
     //마이페이지 이동
