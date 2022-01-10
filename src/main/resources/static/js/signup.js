@@ -1,10 +1,10 @@
 
 //아이디 유효성 검사
 $(function(){
-    $("#m_id").keyup(function(){
+    $("#m_id0").keyup(function(){
             //해당 아이디에 키보드가 눌렸을떄
-          var m_id = $("#m_id").val();
-
+          var m_id = $("#m_id0").val();
+            alert(m_id);
           var idj=/^[a-z0-9]{5,15}$/    //정규 표현식 영소문자 5~15글자만 허용
 
           if(!idj.test(m_id)){ // 정규표현식이 다를 경우
@@ -24,11 +24,11 @@ $(function(){
                  $("#idresult").html("사용가능");
             }
           }
-          })
-    })
+          });
+    });
 
-    $("#m_password").keyup(function(){
-        var m_password = $("#m_password").val();
+    $("#m_password0").keyup(function(){
+        var m_password = $("#m_password0").val();
         var m_passwordconfirm = $("#m_passwordconfirm").val();
 
         var pwj=/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,16}$/
