@@ -42,13 +42,15 @@ public class BoardController {
     @PostMapping("/board/boardwritecontroller")
     public String boardwritecontroller(@RequestParam("b_img") MultipartFile file){
 
-        //파일처리 [ JSP (COS 라이브러리) ]
-        //String dir = "C:\\Users\\505\\Desktop\\springseb01\\src\\main\\resources\\static\\upload";
-        String dir = "apps/springseb00/src/main/resources/static/upload";
-        String filepath = dir + "/" + file.getOriginalFilename();  //저장 경로 + form에서 첨부한 파일이름 호출
-        //file.getOriginalFilename(); : form 첨부파일 호출
-        file.transferTo(new File(filepath));       //transferTo : 파일 저장 [ 예외 처리 ]
-
+//        //파일처리 [ JSP (COS 라이브러리) ]
+//        //String dir = "C:\\Users\\505\\Desktop\\springseb01\\src\\main\\resources\\static\\upload";
+//        String filepath = dir + "\\" + file.getOriginalFilename();  //저장 경로 + form에서 첨부한 파일이름 호출
+//        //file.getOriginalFilename(); : form 첨부파일 호출
+//        file.transferTo(new File(filepath));       //transferTo : 파일 저장 [ 예외 처리 ]
+        HttpSession session = request.getSession();
+        String root_path = session.getServletContext().getRealPath("/");
+        String uploadPath =root_path + "resources/upload/" + file.getOriginalFilename();
+        file.transferTo(new File(uploadPath));
 
         //제목 내용 호출
         String b_title =request.getParameter("b_title");
@@ -60,8 +62,6 @@ public class BoardController {
                 .build();
 
         System.out.println(boardDto.toString());
-        //세션  선언
-        HttpSession session = request.getSession();
 
         //세션 호출
         MemberDto memberDto= (MemberDto)session.getAttribute("logindto");
