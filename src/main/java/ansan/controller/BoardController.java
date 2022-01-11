@@ -41,16 +41,16 @@ public class BoardController {
     @SneakyThrows
     @PostMapping("/board/boardwritecontroller")
     public String boardwritecontroller(@RequestParam("b_img") MultipartFile file){
-
+// /home/ec2-user/apps/springseb00/
 //        //파일처리 [ JSP (COS 라이브러리) ]
 //        //String dir = "C:\\Users\\505\\Desktop\\springseb01\\src\\main\\resources\\static\\upload";
-//        String filepath = dir + "\\" + file.getOriginalFilename();  //저장 경로 + form에서 첨부한 파일이름 호출
-//        //file.getOriginalFilename(); : form 첨부파일 호출
-//        file.transferTo(new File(filepath));       //transferTo : 파일 저장 [ 예외 처리 ]
+          String dir ="\\home\\ec2-user\\apps\\springseb00\\src\\main\\resources\\static\\upload";
+            String filepath = dir + "\\" + file.getOriginalFilename();  //저장 경로 + form에서 첨부한 파일이름 호출
+            file.transferTo(new File(filepath));       //transferTo : 파일 저장 [ 예외 처리 ]
         HttpSession session = request.getSession();
-        String root_path = session.getServletContext().getRealPath("/");
-        String uploadPath =root_path + "apps/springseb00/src/main/resources/upload/" + file.getOriginalFilename();
-        file.transferTo(new File(uploadPath));
+//        String root_path = session.getServletContext().getRealPath("/");
+//        String uploadPath =root_path + "apps/springseb00/src/main/resources/upload/" + file.getOriginalFilename();
+//        file.transferTo(new File(uploadPath));
 
         //제목 내용 호출
         String b_title =request.getParameter("b_title");
