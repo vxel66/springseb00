@@ -13,15 +13,17 @@ public class BoardDto {
     private String b_title;
     private String b_contetns;
     private String b_writer;
-    private LocalDateTime b_createdDate;
+    private String b_createdDate;
     private int b_view;
+    private String b_img;
 
     // dto -> entity 메소드
     public BoardEntity toentity(){
         return BoardEntity.builder()
                 .b_title( this.b_title )
                 .b_contetns(this.b_contetns )
-                .b_writer( this.b_writer).
-                build();
+                .b_writer( this.b_writer)
+                .b_img(this.b_img)
+                .build();
     }
 }
