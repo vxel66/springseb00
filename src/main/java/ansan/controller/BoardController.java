@@ -49,7 +49,7 @@ public class BoardController {
 //        file.transferTo(new File(filepath));       //transferTo : 파일 저장 [ 예외 처리 ]
         HttpSession session = request.getSession();
         String root_path = session.getServletContext().getRealPath("/");
-        String uploadPath =root_path + "resources/upload/" + file.getOriginalFilename();
+        String uploadPath =root_path + "apps/springseb00/src/main/resources/upload/" + file.getOriginalFilename();
         file.transferTo(new File(uploadPath));
 
         //제목 내용 호출
