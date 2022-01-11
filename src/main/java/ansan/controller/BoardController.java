@@ -44,7 +44,7 @@ public class BoardController {
 // /home/ec2-user/apps/springseb00/
 //        //파일처리 [ JSP (COS 라이브러리) ]
             String dir = "C:\\Users\\505\\Desktop\\springseb01\\src\\main\\resources\\static\\upload";
-//            String dir ="\\home\\ec2-user\\apps\\springseb00\\src\\main\\resources\\static\\upload";
+//          String dir ="\\home\\ec2-user\\apps\\springseb00\\src\\main\\resources\\static\\upload";
             String filepath = dir + "\\" + file.getOriginalFilename();  //저장 경로 + form에서 첨부한 파일이름 호출
             file.transferTo(new File(filepath));       //transferTo : 파일 저장 [ 예외 처리 ]
             HttpSession session = request.getSession();
