@@ -11,12 +11,15 @@
 
     <div class="container">
         <div>
+
             <td th:text="${boardDto.b_num}"></td>
             <td th:text="${boardDto.b_title}"></td>
             <td th:text="${boardDto.b_contetns}"></td>
             <td th:text="${boardDto.b_writer}"></td>
             <td th:text="${boardDto.b_view}"></td>
-            <img th:src="@{'/upload/'+${boardDto.b_img}}">
+            <img th:if="${boardDto.b_img != null}" th:src="@{'/upload/'+${boardDto.b_img}}">
+            <a th:href="@{/board/filedownload(b_img=${boardDto.b_img})}" th:text="${boardDto.b_realimg}"></a>
+
         </div>
         <button th:if=" ${session.logindto != null} and ${session.logindto.m_id == boardDto.b_writer}" th:onclick="|deleteboard('${boardDto.b_num}')|">삭제</button>
         <button th:if=" ${session.logindto != null} and ${session.logindto.m_id == boardDto.b_writer}" >
