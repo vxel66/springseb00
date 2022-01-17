@@ -10,24 +10,56 @@
     <script th:src = "@{/js/board.js}"></script>
 
     <div class="container">
+        <table class="table">
+            <tr>
+                <td th:text="'작성자 : '+${boardDto.b_writer}"></td>
+                <td th:text="'작성일 : '+${boardDto.b_createdDate}"></td>
+                <td th:text="'조회수 : '+${boardDto.b_view}"></td>
+            </tr>
+            <tr colspan="3">
+                <td th:text="${boardDto.b_title}"></td>
+            </tr>
+            <tr colspan="3">
+                <td th:utext="${boardDto.b_contetns}"></td>
+            </tr>
+            <tr colspan="3">
+                <td>
+                <img th:if="${boardDto.b_img != null}" th:src="@{'/upload/'+${boardDto.b_img}}">
+                </td>
+            </tr>
+            <tr colspan="3">
+                <td>
+                <a th:href="@{/board/filedownload(b_img=${boardDto.b_img})}" th:text="${boardDto.b_realimg}"></a>
+                </td>
+            </tr>
+        </table>
         <div>
-
-            <td th:text="${boardDto.b_num}"></td>
-            <td th:text="${boardDto.b_title}"></td>
-            <td th:text="${boardDto.b_contetns}"></td>
-            <td th:text="${boardDto.b_writer}"></td>
-            <td th:text="${boardDto.b_view}"></td>
-            <img th:if="${boardDto.b_img != null}" th:src="@{'/upload/'+${boardDto.b_img}}">
-            <a th:href="@{/board/filedownload(b_img=${boardDto.b_img})}" th:text="${boardDto.b_realimg}"></a>
-
+            <button th:href="@{/board/boardlist}" class="btn">목록보기</button>
+            <button th:if=" ${session.logindto != null} and ${session.logindto.m_id == boardDto.b_writer}" th:onclick="|deleteboard('${boardDto.b_num}')|" class="btn">삭제</button>
+            <a th:href="@{'/board/boardupdate/'+ ${boardDto.b_num}}">
+                <button th:if=" ${session.logindto != null} and ${session.logindto.m_id == boardDto.b_writer}" class="btn">
+                수정
+                </button>
+            </a>
         </div>
-        <button th:if=" ${session.logindto != null} and ${session.logindto.m_id == boardDto.b_writer}" th:onclick="|deleteboard('${boardDto.b_num}')|">삭제</button>
-        <button th:if=" ${session.logindto != null} and ${session.logindto.m_id == boardDto.b_writer}" >
-            <a th:href="@{'/board/boardupdate/'+ ${boardDto.b_num}}">수정</a>
-        </button>
-
+        <div class="row">
+            <div class="col-md-10">
+                <textarea  class="form-control" id="rcontents"></textarea>
+            </div>
+            <div class="col-md-2">
+                <button class="form-control p-3" th:onclick="replywrite([[${boardDto.b_num}]])">댓글등록</button>
+            </div>
+        </div>
+        <table class="table" id="replytable">
+            <tr>
+                <td>작성자<br><span>작성일</span> </td><td>내용</td><td>비고</td>
+            </tr>
+            <tr  th:each="replyentity : ${replyEntity}">
+                <td ><div th:text="${replyentity.rwriter}"></div><div style="font-size: 5px;" th:text="${ #temporals.format( replyentity.createdDate,'yy-MM-dd hh:mm')}"></div> </td>
+                <td th:text="${replyentity.rcontents}">내용</td><td th:if="${session.logindto != null} and ${replyentity.rwriter == session.logindto.m_id}"><button th:onclick="deletereply([[${replyentity.rnum}]])">삭제</button><button>수정</button></td>
+            </tr>
+        </table>
     </div>
-
 
 </body>
 </html>

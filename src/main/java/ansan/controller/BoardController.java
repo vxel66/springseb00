@@ -3,6 +3,7 @@ package ansan.controller;
 import ansan.domain.Dto.BoardDto;
 import ansan.domain.Dto.MemberDto;
 import ansan.domain.Entity.Board.BoardEntity;
+import ansan.domain.Entity.Board.ReplyEntity;
 import ansan.service.BoardService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class BoardController {
@@ -153,7 +153,13 @@ public class BoardController {
         if(boardDto.getB_img()!=null){
             boardDto.setB_realimg(boardDto.getB_img().split("_")[1]);
         }
+        List<ReplyEntity> replyEntity = boardService.getreplylist(b_num);
+
+        //정렬후 -> 내림차순
+        Collections.reverse(replyEntity);
+
         model.addAttribute("boardDto",boardDto);
+        model.addAttribute("replyEntity" ,replyEntity);
 
         return "board/boardview";
             //타임리프를 이용한 html 반환+
@@ -230,6 +236,22 @@ public class BoardController {
 
     }
 
+    @GetMapping("/board/replywrite")
+    @ResponseBody
+    public String replywrite(@RequestParam("b_num")int b_num , @RequestParam("rcontents")String rcontents){
+        HttpSession session =request.getSession();
+        MemberDto memberDto = (MemberDto)session.getAttribute("logindto");
+                boardService.replywrite(b_num,rcontents,memberDto.getM_id());
+        return "1";
+    }
+
+    @GetMapping("/board/replydelete")
+    @ResponseBody
+    public String replydelete(@RequestParam("rnum")int rnum ){
+        HttpSession session =request.getSession();
+        boardService.deletereply(rnum);
+        return "1";
+    }
 
 
 

@@ -5,6 +5,8 @@ import ansan.domain.Dto.BoardDto;
 import ansan.domain.Dto.MemberDto;
 import ansan.domain.Entity.Board.BoardEntity;
 import ansan.domain.Entity.Board.BoardRepository;
+import ansan.domain.Entity.Board.ReplyEntity;
+import ansan.domain.Entity.Board.ReplyRepository;
 import ansan.domain.Entity.Member.MemberEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -154,6 +156,52 @@ public class BoardService {
             return false;
         }
     }
+
+    @Autowired
+    private ReplyRepository repository ;
+
+    //댓글등록
+    public boolean replywrite(int bnum, String rcontents , String rwriter){
+
+        Optional<BoardEntity> entityOptional = boardRepository.findById(bnum); //게시물번호에 해당하는 게시물 엔티티 출력
+
+        ReplyEntity replyEntity = ReplyEntity.builder()
+                .rcontents(rcontents)
+                .rwriter(rwriter)
+                .boardEntity(entityOptional.get())//해당 게시물의 엔티티 넣기
+                .build();
+
+        repository.save(replyEntity);   //게시물 -> 댓글저장
+
+        //해당 게시물내 댓글 저장 [ 댓글 -> 게시글 저장]
+        entityOptional.get().getReplyEntities().add(replyEntity);
+
+        return true;
+    }
+
+    //모든 댓글 출력
+    public List<ReplyEntity> getreplylist(int bnum){
+
+        Optional<BoardEntity> entityOptional = boardRepository.findById(bnum);
+
+        List<ReplyEntity> replyEntities = entityOptional.get().getReplyEntities();
+
+        return replyEntities;
+
+    }
+
+    //댓글 삭제
+    public boolean deletereply(int rnum){
+        Optional<ReplyEntity> replyEntity = repository.findById(rnum);
+        if(replyEntity.get().getRnum()==rnum){
+            repository.delete(replyEntity.get());
+        }
+        return true;
+    }
+
+
+
+
 
 }
 
