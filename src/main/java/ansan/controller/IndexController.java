@@ -9,6 +9,7 @@ public class IndexController {
     // 메인페이지 매핑[ 연결 ]
     @GetMapping("/")
     public String main(){
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@안녕");
         return "main";
     }
 

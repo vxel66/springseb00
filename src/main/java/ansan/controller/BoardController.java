@@ -239,7 +239,7 @@ public class BoardController {
     @GetMapping("/board/replywrite")
     @ResponseBody
     public String replywrite(@RequestParam("b_num")int b_num , @RequestParam("rcontents")String rcontents){
-        HttpSession session =request.getSession();
+        HttpSession session = request.getSession();
         MemberDto memberDto = (MemberDto)session.getAttribute("logindto");
                 boardService.replywrite(b_num,rcontents,memberDto.getM_id());
         return "1";

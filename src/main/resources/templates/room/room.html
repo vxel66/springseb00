@@ -1,0 +1,95 @@
+
+<head>
+    <link th:href="@{/css/room.css}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- 케러셀  -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img th:src="@{'/roomimg/'+${room.roomEntitys.get(0).rimg}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" th:each="roomimg : ${room.roomEntitys}">
+                <img th:src="@{'/roomimg/'+${roomimg.rimg}}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <table class="table table-striped" >
+        <tr>
+            <td>방번호</td><td th:text="${room.rnum}"> </td>
+        </tr>
+        <tr>
+            <td>이름</td><td th:text="${room.rmname}"> </td>
+        </tr>
+        <tr>
+            <td>가격</td><td th:text="${room.rprice}"> </td>
+        </tr>
+        <tr>
+            <td>면적</td><td th:text="${room.rarea}"> </td>
+        </tr>
+        <tr>
+            <td>관리비</td><td th:text="${room.rmanagementfee}"> </td>
+        </tr>
+        <tr>
+            <td>준공날짜</td><td th:text="${room.rcompletiondate}"> </td>
+        </tr>
+        <tr>
+            <td>입주가능일</td><td th:text="${room.rindate}"> </td>
+        </tr>
+        <tr>
+            <td>구조</td><td th:text="${room.rstructure}"> </td>
+        </tr>
+        <tr>
+            <td>층</td><td th:text="${room.rfloor}"> </td>
+        </tr>
+        <tr>
+            <td>방번호</td><td th:text="${room.rkind}"> </td>
+        </tr>
+        <tr>
+            <td>주소</td><td th:text="${room.raddress}"> </td>
+        </tr>
+        <tr>
+            <td>내용</td><td th:text="${room.rcontents}"> </td>
+        </tr>
+        <tr>
+            <td>상태</td><td th:text="${room.ractive}"> </td>
+        </tr>
+        <tr>
+            <td>방번호</td><td th:text="${room.rtras}"> </td>
+        </tr>
+    </table>
+    <button data-bs-target="#notemodal" data-bs-toggle="modal">문의하기</button>
+
+    <div class="modal fade" tabindex="-1" id="notemodal" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content rounded-4 shadow">
+                <div class="modal-body p-4 text-center">
+                    <h5 class="mb-0"> 방 문의하기 </h5>
+                    <p class="mb-3" id="notemsg"> 방 주인에게 문의하기 </p>
+                    <textarea class="form-control" rows="10" id="ncontents"></textarea>
+                </div>
+                <div class="modal-footer flex-nowrap p-0">
+                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right" th:onclick="notewrite([[${room.rnum}]])"><strong> 문의 합니다.</strong></button>
+                    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal"> 문의 취소합니다. </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:replace="header.html :: header" ></div>
+
+
+    <div class="container">
+        <div class="offset-2 col-md-8">
+            <form method="post" action="/room/roomwritecontroller" enctype="multipart/form-data">
+                <div class="row ">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2 "> <label>이름</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rmname"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>가격</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rprice"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label> 면적</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rarea"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>관리비</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rmanagementfee"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>준공날짜</label> </div>
+                    <div class="col-md-8"> <input type="date" name="rcompletiondate"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>입주가능일</label> </div>
+                    <div class="col-md-8"> <input type="date" name="rindate"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>구조</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rstructure"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>층/건물층수</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rfloor"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>건물종류</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rkind"> </div>
+                </div>
+
+                <input type="text" id="sample5_address" placeholder="주소" class="form-control" name="raddress">
+                <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" class="form-control">
+                <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+
+                <input type="hidden" name="addressx" id="addressx">
+                <input type="hidden" name="addressy" id="addressy">
+
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>내용</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rcontents"> </div>
+                </div>
+                <div class="row">	<!-- 3:8 -->
+                    <div class="col-md-3 m-2"> <label>거래방식</label> </div>
+                    <div class="col-md-8"> <input type="text" name="rtras"> </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 m-2"> <label>사진</label> </div>
+                    <div class="col-md-8"> <input type="file" multiple="multiple" name="file"><input type="submit" value="등록"> </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e638bb2ba339af23d798a4e43091f89&libraries=services"></script>
+    <script th:src = "@{/js/roomwrite.js}"></script>
+</body>
+</html>

@@ -28,10 +28,10 @@
             </a>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/board/boardlist(keyboard=null,serch=null)}" class="nav-link px-2 link-dark">커뮤니티 </a></li>
-                <li><a th:href="@{/board/boardlist}" class="nav-link px-2 link-dark">a </a></li>
-                <li><a th:href="@{/board/boardlist}" class="nav-link px-2 link-dark">a </a></li>
-                <li><a th:href="@{/board/boardlist}" class="nav-link px-2 link-dark">a </a></li>
-                <li><a th:href="@{/board/boardlist}" class="nav-link px-2 link-dark">a </a></li>
+                <li><a th:if="${session.logindto != null}" th:href="@{/room/roomwrite}" class="nav-link px-2 link-dark"> 방등록 </a></li>
+                <li><a th:if="${session.logindto != null}" th:href="@{/admin/roomlist}" class="nav-link px-2 link-dark">방리스트 </a></li>
+                <li><a th:href="@{/room/roomview}" class="nav-link px-2 link-dark">방보기 </a></li>
+                <li><a th:if="${session.logindto != null }" th:href="@{/room/notelist}" class="nav-link px-2 link-dark">쪽지</a></li>
                 <li><a th:href="@{/board/boardlist}" class="nav-link px-2 link-dark">a </a></li>
             </ul>
             <div class="col-md-3 text-end">

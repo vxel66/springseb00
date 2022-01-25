@@ -3,6 +3,8 @@ package ansan.service;
 import ansan.domain.Dto.MemberDto;
 import ansan.domain.Entity.Member.MemberEntity;
 import ansan.domain.Entity.Member.MemberRepository;
+import ansan.domain.Entity.Room.NoteEntity;
+import ansan.domain.Entity.Room.RoomEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -162,6 +166,13 @@ public class MemberService {
         }
         return false;
     }
+
+    //회원번호 -> 회원엔티티 반환
+    public MemberEntity getmnum(int m_num){
+        Optional<MemberEntity> memberEntity =memberRepository.findById(m_num);
+        return  memberEntity.get();
+    }
+
 
 
 }
