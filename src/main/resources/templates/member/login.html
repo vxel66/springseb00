@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div th:replace="header.html :: header" ></div>
+
+    <form action="/member/logincontroller" method="post">
+        id: <input name="mid" type="text">
+        password: <input name="m_password" type="password">
+        <input type="submit" value="로그인">
+    </form>
+
+</body>
+</html>

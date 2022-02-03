@@ -18,7 +18,7 @@ public class MemberEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto key
     private int m_num;   // 회원번호
     @Column
-    private String m_id;    // 회원아이디
+    private String mid;    // 회원아이디
     @Column
     private String m_password; // 회원비밀번호
     @Column
@@ -33,8 +33,15 @@ public class MemberEntity extends BaseTimeEntity {
     private String m_address; // 회원주소
     @Column
     private int m_point; // 회원포인트
+
+    @Enumerated(EnumType.STRING)
     @Column
-    private String m_grade; // 회원등급
+    private Role m_grade; // 회원등급
+
+    //해당 Role에 key 반환 메소드
+    public String getRolekey(){
+        return this.m_grade.getKey();
+    }
 
     @OneToMany(mappedBy = "memberEntity")
     private List<RoomEntity> roomEntityList = new ArrayList<>();
