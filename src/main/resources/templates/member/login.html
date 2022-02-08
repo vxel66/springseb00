@@ -12,7 +12,15 @@
         id: <input name="mid" type="text">
         password: <input name="m_password" type="password">
         <input type="submit" value="로그인">
+
+    <a href="/oauth2/authorization/kakao">카카오로그인</a>
+    <a href="/oauth2/authorization/naver">네이버로그인</a>
+    <a href="/oauth2/authorization/google">구글로그인</a>
     </form>
+    <div th:if="${param.error}">
+        로그인실패[ 아이디 혹은 비밀번호가 다릅니다 ]
+    </div>
+
 
 </body>
 </html>

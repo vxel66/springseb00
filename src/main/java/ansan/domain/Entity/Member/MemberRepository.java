@@ -10,4 +10,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity , Integer> 
     @Query
     Optional<MemberEntity> findByMid(String mid);
 
+    @Query
+    Optional<MemberEntity> findByMemail(String memail);
+
 }

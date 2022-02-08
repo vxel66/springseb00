@@ -71,7 +71,7 @@ public class MemberService implements UserDetailsService {
         for( MemberEntity memberEntity  :  memberEntities){
             // 3. 만약에 해당 엔티티가 이름과 이메일이 동일하면
             if( memberEntity.getM_name().equals(memberDto.getM_name()) &&
-                memberEntity.getM_email().equals( memberDto.getM_email() )){
+                memberEntity.getMemail().equals( memberDto.getM_email() )){
                 // 4. 아이디를 반환한다
                 return memberEntity.getMid();
             }
@@ -91,7 +91,7 @@ public class MemberService implements UserDetailsService {
         List<MemberEntity> memberEntities = memberRepository.findAll();
 
         for( MemberEntity memberEntity  :  memberEntities) {
-            if(memberEntity.getM_email().equals(memberDto.getM_email())){
+            if(memberEntity.getMemail().equals(memberDto.getM_email())){
             StringBuilder body = new StringBuilder();   // StringBuilder  : 문자열 연결 클래스  [ 문자열1+문자열2 ]
             body.append("<html> <body><h1> Ansan 계정 임시 비밀번호 </h1>");    // 보내는 메시지에 html 추가
 
@@ -148,7 +148,7 @@ public class MemberService implements UserDetailsService {
     public boolean emailcheck(String m_email){
         List<MemberEntity> members = memberRepository.findAll();
         for(MemberEntity memberEntity : members){
-            if(memberEntity.getM_email().equals(m_email)){
+            if(memberEntity.getMemail().equals(m_email)){
                 return true;
             }
         }
@@ -165,7 +165,7 @@ public class MemberService implements UserDetailsService {
                 .m_id(memberEntity.get().getMid())
                 .m_name(memberEntity.get().getM_name())
                 .m_address(memberEntity.get().getM_address())
-                .m_email(memberEntity.get().getM_email())
+                .m_email(memberEntity.get().getMemail())
                 .m_grade(memberEntity.get().getM_grade())
                 .m_phone(memberEntity.get().getM_phone())
                 .m_point(memberEntity.get().getM_point())
@@ -189,6 +189,8 @@ public class MemberService implements UserDetailsService {
         return  memberEntity.get();
     }
 
+    @Autowired
+    private HttpServletRequest request;
 
     @Override   //member/logincontroller url 호출시 실행되는 메소드 [로그인처리(인증처리) 메소드]
     public UserDetails loadUserByUsername(String mid) throws UsernameNotFoundException {
@@ -200,6 +202,9 @@ public class MemberService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(memberEntity.getRolekey()));
 
+        MemberDto loginDto = MemberDto.builder().m_id(memberEntity.getMid()).m_num(memberEntity.getM_num()).build();
+        HttpSession session = request.getSession();
+        session.setAttribute( "logindto" , loginDto );
         //회원정보와 권한을 갖는UserDetail 반환
         return new IntergratedDto(memberEntity,authorities);
     }
